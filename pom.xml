@@ -15,7 +15,7 @@
 
         <!-- Dependencies -->
         <mysql.version>8.2.0</mysql.version>
-        <annotations.version>24.0.1</annotations.version>
+        <annotations.version>24.1.0</annotations.version>
         <slf4j.version>2.0.9</slf4j.version>
         <log4j.version>2.21.1</log4j.version>
         <hibernate.version>5.6.15.Final</hibernate.version>
