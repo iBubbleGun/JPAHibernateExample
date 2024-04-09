@@ -1,4 +1,4 @@
-package edu.hillel.DAO;
+package edu.hillel.dao;
 
 import edu.hillel.models.Auto;
 import edu.hillel.models.User;
@@ -11,18 +11,15 @@ import java.util.List;
 public class UserDao {
 
     public List<User> findAll() {
-        return HibernateSessionFactoryUtil
-                .getSessionFactory()
-                .openSession()
-                .createQuery("From User", User.class)
-                .list();
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            return session.createQuery("From User", User.class).list();
+        }
     }
 
     public User findById(int id) {
-        return HibernateSessionFactoryUtil
-                .getSessionFactory()
-                .openSession()
-                .get(User.class, id);
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            return session.get(User.class, id);
+        }
     }
 
     public void save(User user) {
@@ -30,7 +27,7 @@ public class UserDao {
                 .getSessionFactory()
                 .openSession();
         final Transaction transaction = session.beginTransaction();
-        session.save(user);
+        session.persist(user);
         transaction.commit();
         session.close();
     }
@@ -40,7 +37,7 @@ public class UserDao {
                 .getSessionFactory()
                 .openSession();
         final Transaction transaction = session.beginTransaction();
-        session.update(user);
+        session.merge(user);
         transaction.commit();
         session.close();
     }
@@ -50,15 +47,14 @@ public class UserDao {
                 .getSessionFactory()
                 .openSession();
         final Transaction transaction = session.beginTransaction();
-        session.delete(user);
+        session.remove(user);
         transaction.commit();
         session.close();
     }
 
     public Auto findAutoById(int id) {
-        return HibernateSessionFactoryUtil
-                .getSessionFactory()
-                .openSession()
-                .get(Auto.class, id);
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            return session.get(Auto.class, id);
+        }
     }
 }

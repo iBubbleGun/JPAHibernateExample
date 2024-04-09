@@ -1,6 +1,6 @@
 package edu.hillel.services;
 
-import edu.hillel.DAO.UserDao;
+import edu.hillel.dao.UserDao;
 import edu.hillel.models.Auto;
 import edu.hillel.models.User;
 
@@ -9,9 +9,6 @@ import java.util.List;
 public class UserService {
 
     private final UserDao usersDao = new UserDao();
-
-    public UserService() {
-    }
 
     public User findUser(int id) {
         return usersDao.findById(id);
